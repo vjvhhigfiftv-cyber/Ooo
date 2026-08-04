@@ -437,25 +437,11 @@ def main():
 
     # تشغيل البوت
     log.info("🚀 البوت يعمل...")
-    
-    # تنظيف أي جلسة سابقة وانتظار
     try:
         bot.remove_webhook()
-        bot.stop_polling()
     except:
         pass
-    time.sleep(3)
-    
-    while True:
-        try:
-            bot.polling(none_stop=True, timeout=30, long_polling_timeout=15)
-        except Exception as e:
-            log.error(f"⚠️ خطأ: {e}")
-            try:
-                bot.stop_polling()
-            except:
-                pass
-            time.sleep(10)
+    bot.infinity_polling(timeout=20, long_polling_timeout=10)
 
 if __name__ == "__main__":
     main()
